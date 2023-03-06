@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Hello World" package="org.openfl.lime.samples.helloworld" version="1.0.0" company="OpenFL" />
+
+	<app main="Main" path="Export" file="HelloWorld" />
+
+	<source path="Source" />
+
+	<haxelib name="extension-androidtools" if="android" />
+	<haxelib name="lime" />
+
+	<assets path="Assets" rename="assets" />
+
+	<section if="android">
+		<!--Gradle-->
+		<config:android gradle-version="7.4.2" gradle-plugin="7.3.1" />
+
+		<!--Target SDK-->
+		<config:android target-sdk-version="29" if="${lime < 8.1.0}" />
+	</section>
+
+</project>
