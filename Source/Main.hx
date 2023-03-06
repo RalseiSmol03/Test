@@ -67,6 +67,7 @@ class Main extends Application
 				var gl = context.webgl;
 				gl.clearColor(0.75, 1, 0, 1);
 				gl.clear(gl.COLOR_BUFFER_BIT);
+			default:
 		}
 	}
 }
