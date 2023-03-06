@@ -26,22 +26,24 @@ class Main extends Application
 		// check if isn't ok
 		if (ret != Lua.OK)
 		{
-			Application.current.window.alert(Lua.tostring(vm, ret), "Lua Script Error!");
+			Toast.makeText('Lua Script Error: ' + Lua.tostring(vm, ret), Toast.LENGTH_LONG);
 			Lua.pop(vm, 1);
 		}
-
-		// call 'foo' function
-		Lua.getglobal(vm, "foo");
-		Lua.pushinteger(vm, 1);
-		Lua.pushnumber(vm, 2.0);
-		Lua.pushstring(vm, "three");
-		Lua.pcall(vm, 3, 0, 1);
+		else
+		{
+			// call 'foo' function
+			Lua.getglobal(vm, "foo");
+			Lua.pushinteger(vm, 1);
+			Lua.pushnumber(vm, 2.0);
+			Lua.pushstring(vm, "three");
+			Lua.pcall(vm, 3, 0, 1);
+		}
 
 		// close the state after pcall
 		Lua.close(vm);
 		vm = null;
 
-		Toast.makeText('Script Executed!', Toast.LENGTH_LONG);
+		Toast.makeText('Lua Script Executed!', Toast.LENGTH_LONG);
 	}
 
 	public override function render(context:RenderContext):Void
