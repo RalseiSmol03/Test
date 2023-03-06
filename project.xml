@@ -7,8 +7,9 @@
 
 	<source path="Source" />
 
-	<haxelib name="extension-androidtools" if="android" />
 	<haxelib name="lime" />
+	<haxelib name="hxlua" />
+	<haxelib name="extension-androidtools" if="android" />
 
 	<assets path="Assets" rename="assets" />
 
