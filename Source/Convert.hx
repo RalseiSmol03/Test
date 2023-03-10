@@ -37,15 +37,15 @@ class Convert
 				}
 			case TClass(haxe.ds.StringMap) | TClass(haxe.ds.ObjectMap):
 				var tLen:Int = 0;
-				for (n in object.keys())
+				for (n => val in object)
 					tLen++;
 
 				Lua.createtable(L, tLen, 0);
 
-				for (index => val in object)
+				for (n => val in object)
 				{
-					Lua.pushstring(L, Std.string(index));
-					toLua(L, object);
+					Lua.pushstring(L, Std.string(n));
+					toLua(L, val);
 					Lua.settable(L, -3);
 				}
 			case TObject:
