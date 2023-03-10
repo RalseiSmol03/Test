@@ -20,8 +20,6 @@ class Convert
 				Lua.pushboolean(L, object ? 1 : 0);
 			case TInt:
 				Lua.pushinteger(L, object);
-			// case TFunction:
-			// 	Lua.pushcfunction(L, object);
 			case TFloat:
 				Lua.pushnumber(L, object);
 			case TClass(String):
@@ -35,6 +33,8 @@ class Convert
 					toLua(L, object[i]);
 					Lua.settable(L, -3);
 				}
+			case TClass(cpp.Callable):
+			 	Lua.pushcfunction(L, object);
 			case TClass(haxe.ds.StringMap) | TClass(haxe.ds.ObjectMap):
 				var tLen:Int = 0;
 				for (n => val in object)
