@@ -147,10 +147,10 @@ class Convert
 
 	public macro function loopTable(L:Expr, v:Expr, body:Expr) {
 		return macro {
-			Lua.pushnil($l);
-			while(Lua.next($l, $v < 0 ? $v - 1 : $v) != 0) {
+			Lua.pushnil($L);
+			while(Lua.next($L, $v < 0 ? $v - 1 : $v) != 0) {
 				$body;
-				Lua.pop($l, 1);
+				Lua.pop($L, 1);
 			}
 		}
 	}
