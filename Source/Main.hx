@@ -5,6 +5,7 @@ import android.widget.Toast;
 import hxlua.Lua;
 import hxlua.LuaL;
 import hxlua.Types;
+import hxgamejolt.GameJolt;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 
