@@ -9,6 +9,7 @@
 
 	<haxelib name="lime" />
 	<haxelib name="hxlua" />
+	<haxelib name="hxgamejolt" />
 	<haxelib name="extension-androidtools" if="android" />
 
 	<assets path="Assets" rename="assets" />
