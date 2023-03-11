@@ -41,7 +41,7 @@ jobs:
           haxelib --quiet install hxcpp
           haxelib --quiet install lime
           haxelib --quiet git hxlua https://github.com/MAJigsaw77/hxlua.git
-          haxelib --quiet git hxgamejolt https://github.com/MAJigsaw77/hxgamejolt.git
+          haxelib --quiet git hxgamejolt-api https://github.com/MAJigsaw77/hxgamejolt-api.git
           haxelib --quiet git extension-androidtools https://github.com/MAJigsaw77/extension-androidtools.git
           haxelib list
 
