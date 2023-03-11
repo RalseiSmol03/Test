@@ -37,7 +37,14 @@ class Main extends Application
 			Lua.pushnumber(vm, 2.0);
 			Lua.pushstring(vm, "three");
 			Lua.pushcfunction(vm, cpp.Callable.fromStaticFunction(callIndex));
-			Lua.pcall(vm, 3, 0, 1);
+
+			var call:Int = Lua.pcall(vm, 3, 0, 1);
+
+			if (call != Lua.OK)
+			{
+				Toast.makeText('Lua Call Error: ' + Lua.tostring(vm, call), Toast.LENGTH_LONG);
+				Lua.pop(vm, 1);
+			}
 		}
 
 		// close the state after pcall
