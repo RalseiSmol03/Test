@@ -36,9 +36,8 @@ class Main extends Application
 			Lua.pushinteger(vm, 1);
 			Lua.pushnumber(vm, 2.0);
 			Lua.pushstring(vm, "three");
-			Lua.pushcfunction(vm, cpp.Callable.fromStaticFunction(callIndex));
 
-			var call:Int = Lua.pcall(vm, 4, Lua.MULTRET, 0);
+			var call:Int = Lua.pcall(vm, 3, Lua.MULTRET, 0);
 
 			if (call != Lua.OK)
 			{
@@ -53,9 +52,6 @@ class Main extends Application
 
 		Toast.makeText('Lua Script Executed!', Toast.LENGTH_LONG);
 	}
-
-	static function callIndex(vm:cpp.RawPointer<Lua_State>):Int
-		return 4;
 
 	public override function render(context:RenderContext):Void
 	{
