@@ -38,7 +38,7 @@ class Main extends Application
 			Lua.pushstring(vm, "three");
 			Lua.pushcfunction(vm, cpp.Callable.fromStaticFunction(callIndex));
 
-			var call:Int = Lua.pcall(vm, 4, 1, 0);
+			var call:Int = Lua.pcall(vm, 4, Lua.MULTRET, 0);
 
 			if (call != Lua.OK)
 			{
