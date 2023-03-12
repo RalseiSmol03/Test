@@ -46,7 +46,7 @@ class Main extends Application
 				Lua.pop(vm, 1);
 			}
 
-			Toast.makeText('Lua Script Executed!\nTotal GC Memory: ${getMemorySize(Lua.gc(vm, Lua.GCCOUNTB, cpp.VirtualArray.fromArray([0])))}', Toast.LENGTH_LONG);
+			Toast.makeText('Lua Script Executed!\nTotal GC Memory: ${getMemorySize(Lua.gc(vm, Lua.GCCOUNTB, 0))}', Toast.LENGTH_LONG);
 		}
 
 		// close the state after pcall
