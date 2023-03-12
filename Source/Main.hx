@@ -45,13 +45,36 @@ class Main extends Application
 				Toast.makeText('Lua Call Error: ' + Lua.tostring(vm, call), Toast.LENGTH_LONG);
 				Lua.pop(vm, 1);
 			}
+
+			Toast.makeText('Lua Script Executed!\nTotal GC Memory: ${getMemorySize(Lua.gc(vm, Lua.GCCOUNTB, 0))}', Toast.LENGTH_LONG);
 		}
 
 		// close the state after pcall
 		Lua.close(vm);
 		vm = null;
+	}
 
-		Toast.makeText('Lua Script Executed!', Toast.LENGTH_LONG);
+	public function getMemorySize(size:Float):String
+	{
+		final labels:Array<String> = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+		var label:Int = 0;
+
+		while (size >= 1000 && (label < labels.length - 1))
+		{
+			size /= 1000;
+			label++;
+		}
+
+		return '${Std.int(size) + "." + addZeros(Std.string(Std.int((size % 1) * 100)), 2)}${labels[label]}';
+	}
+
+	public inline function addZeros(str:String, num:Int)
+	{
+		while (str.length < num)
+			str = '0${str}';
+
+		return str;
 	}
 
 	public override function render(context:RenderContext):Void
