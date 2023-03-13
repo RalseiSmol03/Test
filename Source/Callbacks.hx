@@ -14,6 +14,7 @@ class Callbacks
 			return;
 
 		callbacks.set(name, callback);
+
 		Lua.pushstring(L, name);
 		Lua.pushcclosure(L, cpp.Callable.fromStaticFunction(callbackHandler), 1);
 		Lua.setglobal(L, name);
@@ -25,6 +26,7 @@ class Callbacks
 			return;
 
 		callbacks.remove(name);
+
 		Lua.pushnil(L);
 		Lua.setglobal(L, name);
 	}
