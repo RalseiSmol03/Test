@@ -10,7 +10,7 @@ class Callbacks
 
 	public static function addCallback(L:cpp.RawPointer<Lua_State>, name:String, callback:Dynamic):Void
 	{
-		if (callbacks.exists(name) || Reflect.isFunction(callback))
+		if (callbacks.exists(name) || !#Reflect.isFunction(callback))
 			return;
 
 		callbacks.set(name, callback);
