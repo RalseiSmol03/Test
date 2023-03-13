@@ -1,7 +1,6 @@
 package;
 
 import hxlua.Lua;
-import hxlua.LuaL;
 import hxlua.Types;
 
 class Callbacks
