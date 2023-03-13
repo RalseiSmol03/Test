@@ -6,9 +6,9 @@ import hxlua.Types;
 
 class Callbacks
 {
-	public static var callbacks:Map<String, Dynamic> = [];
+	private static var callbacks:Map<String, Dynamic> = [];
 
-	public static function addCallback(L:cpp.RawPointer<Lua_State>, name:String, callback:Dynamic):Void
+	public static function add(L:cpp.RawPointer<Lua_State>, name:String, callback:Dynamic):Void
 	{
 		if (callbacks.exists(name) || !#Reflect.isFunction(callback))
 			return;
@@ -20,7 +20,7 @@ class Callbacks
 		Lua.setglobal(L, name);
 	}
 
-	public static inline function removeCallback(L:cpp.RawPointer<Lua_State>, name:String):Void
+	public static inline function remove(L:cpp.RawPointer<Lua_State>, name:String):Void
 	{
 		if (!callbacks.exists(name))
 			return;
@@ -46,7 +46,10 @@ class Callbacks
 		var ret:Dynamic = Reflect.callMethod(null, callbacks.get(name), args);
 
 		if (ret != null)
+		{
 			Convert.toLua(l, ret);
+			return 1;
+		}
 
 		return 0;
 	}
