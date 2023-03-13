@@ -31,7 +31,7 @@ class Callbacks
 		Lua.setglobal(L, name);
 	}
 
-	public static inline function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
+	private static function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
 	{
 		var name:String = Lua.tostring(L, Lua.upvalueindex(1));
 
