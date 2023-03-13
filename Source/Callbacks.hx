@@ -6,7 +6,7 @@ import hxlua.Types;
 
 class Callbacks
 {
-	public static var callbacks:Map<String, Dynamic> = new Map();
+	public static var callbacks:Map<String, Dynamic> = [];
 
 	public static function addCallback(L:cpp.RawPointer<Lua_State>, name:String, callback:Dynamic):Void
 	{
@@ -38,8 +38,8 @@ class Callbacks
 
 		var args:Array<Dynamic> = [];
 
-		for (i in 0...Lua.gettop(l))
-			args[i] = Convert.fromLua(l, i + 1);
+		for (i in 0...Lua.gettop(L))
+			args[i] = Convert.fromLua(L, i + 1);
 
 		var ret:Dynamic = Reflect.callMethod(null, callbacks.get(name), args);
 
