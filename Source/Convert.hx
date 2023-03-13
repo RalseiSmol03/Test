@@ -33,7 +33,7 @@ class Convert
 					toLua(L, object[i]);
 					Lua.settable(L, -3);
 				}
-			case TClass(cpp.Callable):
+			case TClass(cpp.Callable) | TClass(cpp.Function):
 			 	Lua.pushcfunction(L, object);
 			case TClass(haxe.ds.StringMap) | TClass(haxe.ds.ObjectMap):
 				var tLen:Int = 0;
@@ -148,7 +148,7 @@ class Convert
 	public macro function loopTable(L:Expr, v:Expr, body:Expr) {
 		return macro {
 			Lua.pushnil($L);
-			while(Lua.next($L, $v < 0 ? $v - 1 : $v) != 0) {
+			while (Lua.next($L, $v < 0 ? $v - 1 : $v) != 0) {
 				$body;
 				Lua.pop($L, 1);
 			}
