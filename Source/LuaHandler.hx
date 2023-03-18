@@ -1,5 +1,6 @@
 package;
 
+import android.content.Context;
 import haxe.DynamicAccess;
 import hxlua.Lua;
 import hxlua.LuaL;
