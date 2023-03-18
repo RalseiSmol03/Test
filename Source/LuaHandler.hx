@@ -139,11 +139,11 @@ class LuaHandler
 		{
 			switch (status)
 			{
-				case Lua.ERRRUN:
+				case t if (t == Lua.ERRRUN):
 					return "Runtime Error";
-				case Lua.ERRMEM:
+				case t if (t == Lua.ERRMEM):
 					return "Memory Allocation Error";
-				case Lua.ERRERR:
+				case t if (t == Lua.ERRERR):
 					return "Critical Error";
 				default:
 					return "Unknown Error";
@@ -243,15 +243,15 @@ class LuaHandler
 
 		switch (Lua.type(L, v))
 		{
-			case Lua.TNIL:
+			case t if (t == Lua.TNIL):
 				ret = null;
-			case Lua.TBOOLEAN:
+			case t if (t == Lua.TBOOLEAN):
 				ret = Lua.toboolean(L, v) == 1 ? true : false;
-			case Lua.TNUMBER:
+			case t if (t == Lua.TNUMBER):
 				ret = Lua.tonumber(L, v);
-			case Lua.TSTRING:
+			case t if (t == Lua.TSTRING):
 				ret = Lua.tostring(L, v);
-			case Lua.TTABLE:
+			case t if (t == Lua.TTABLE):
 				var count:Int = 0;
 				var array:Bool = true;
 
