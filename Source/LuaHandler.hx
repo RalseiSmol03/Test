@@ -7,6 +7,8 @@ import hxlua.LuaL;
 import hxlua.Types;
 import lime.app.Application;
 
+using StringTools;
+
 class LuaHandler
 {
 	private static var callbacks:Map<String, Dynamic> = [];
