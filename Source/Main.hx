@@ -1,5 +1,6 @@
 package;
 
+import LuaHandler;
 import android.content.Context;
 import android.widget.Toast;
 import hxlua.Lua;
