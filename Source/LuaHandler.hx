@@ -300,9 +300,9 @@ class LuaHandler
 					{
 						switch (Lua.type(L, -2))
 						{
-							case LuaType.STRING_TYPE:
+							case t if (t == Lua.TSTRING):
 								vAccess.set(Lua.tostring(L, -2), fromLua(L, -1));
-							case LuaType.NUMBER_TYPE:
+							case t if (t == Lua.TNUMBER):
 								vAccess.set(Std.string(Lua.tonumber(L, -2)), fromLua(L, -1));
 						}
 
