@@ -1,7 +1,6 @@
 package;
 
 import haxe.DynamicAccess;
-import haxe.Exception;
 import hxlua.Lua;
 import hxlua.LuaL;
 import hxlua.Types;
@@ -21,7 +20,7 @@ class LuaHandler
 		LuaL.openlibs(vm);
 
 		// make a new file with the instance and check if it can be ran
-		var status:Int = LuaL.dofile(vm, path);
+		var status:Int = LuaL.dofile(vm, Context.getExternalFilesDir(null) + path);
 		if (status != Lua.OK)
 		{
 			var error:String = getErrorMessage(status, 0);
