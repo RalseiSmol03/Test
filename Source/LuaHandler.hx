@@ -107,7 +107,7 @@ class LuaHandler
 
 	public function setCallback(name:String, callback:Dynamic):Void
 	{
-		if (vm == null || (callbacks.exists(name) || !Reflect.isFunction(callback)))
+		if (vm == null || callbacks.exists(name) || !Reflect.isFunction(callback))
 			return;
 
 		callbacks.set(name, callback);
@@ -161,7 +161,7 @@ class LuaHandler
 		if (!callbacks.exists(name) || callbacks.get(name) == null)
 			return 0;
 
-		var args:Array<Dynamic> = [];
+		var args:Array<Any> = [];
 
 		for (i in 0...Lua.gettop(L))
 			args[i] = fromLua(L, i + 1);
