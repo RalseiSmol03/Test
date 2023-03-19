@@ -24,9 +24,9 @@ class Main extends Application
 		Application.current.onExit.add(function(code:Int)
 		{
 			@:privateAccess
-			Toast.makeText('Lua Script Executed!\nTotal GC Memory: ${getMemorySize(Lua.gc(handle.vm, Lua.GCCOUNTB, [0]))}', Toast.LENGTH_LONG);
+			Toast.makeText('Lua Script Executed!\nTotal GC Memory: ${getMemorySize(Lua.gc(handler.vm, Lua.GCCOUNTB, [0]))}', Toast.LENGTH_LONG);
 
-			handle.close();
+			handler.close();
 		});
 	}
 
