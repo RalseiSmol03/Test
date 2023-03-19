@@ -9,19 +9,19 @@ import lime.graphics.RenderContext;
 
 class Main extends Application
 {
-	public function new()
+	public function new():Void
 	{
 		super();
 
 		var handler:LuaHandler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
 		handler.setCallback('gameJoltInit', function(Game_id:String, Private_key:String)
 		{
-			Gamejolt.init(Game_id, Private_key);
+			GameJolt.init(Game_id, Private_key);
 			Toast.makeText('GameJolt Init successfully called!!!', Toast.LENGTH_LONG);
 		});
 		handler.call('init');
 
-		current.onExit.add(function(code:Int)
+		Application.current.onExit.add(function(code:Int)
 		{
 			@:privateAccess
 			Toast.makeText('Lua Script Executed!\nTotal GC Memory: ${getMemorySize(Lua.gc(handle.vm, Lua.GCCOUNTB, [0]))}', Toast.LENGTH_LONG);
