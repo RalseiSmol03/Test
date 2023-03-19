@@ -1,6 +1,5 @@
 package;
 
-import android.content.Context;
 import haxe.DynamicAccess;
 import hxlua.Lua;
 import hxlua.LuaL;
@@ -23,7 +22,7 @@ class LuaHandler
 		LuaL.openlibs(vm);
 
 		// make a new file with the instance and check if it can be ran
-		var status:Int = LuaL.dofile(vm, Context.getExternalFilesDir(null) + path);
+		var status:Int = LuaL.dofile(vm, path);
 		if (status != Lua.OK)
 		{
 			var error:String = getErrorMessage(status, 0);
