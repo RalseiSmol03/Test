@@ -1,11 +1,8 @@
 package;
 
-import LuaHandler;
 import android.content.Context;
 import android.widget.Toast;
 import hxlua.Lua;
-import hxlua.LuaL;
-import hxlua.Types;
 import hxgamejolt.GameJolt;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -16,43 +13,21 @@ class Main extends Application
 	{
 		super();
 
-		// create the new state
-		var vm:cpp.RawPointer<Lua_State> = LuaL.newstate();
-
-		// open the libs
-		LuaL.openlibs(vm);
-
-		// do the file
-		var ret:Int = LuaL.dofile(vm, Context.getExternalFilesDir(null) + "/script.lua");
-
-		// check if isn't ok
-		if (ret != Lua.OK)
+		var handler:LuaHandler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
+		handler.setCallback('gameJoltInit', function(Game_id:String, Private_key:String)
 		{
-			Toast.makeText('Lua Script Error: ' + Lua.tostring(vm, ret), Toast.LENGTH_LONG);
-			Lua.pop(vm, 1);
-		}
-		else
+			Gamejolt.init(Game_id, Private_key);
+			Toast.makeText('GameJolt Init successfully called!!!', Toast.LENGTH_LONG);
+		});
+		handler.call('init');
+
+		current.onExit.add(function(code:Int)
 		{
-			// call 'foo' function
-			Lua.getglobal(vm, "foo");
-			Lua.pushinteger(vm, 1);
-			Lua.pushnumber(vm, 2.0);
-			Lua.pushstring(vm, "three");
+			@:privateAccess
+			Toast.makeText('Lua Script Executed!\nTotal GC Memory: ${getMemorySize(Lua.gc(handle.vm, Lua.GCCOUNTB, [0]))}', Toast.LENGTH_LONG);
 
-			var call:Int = Lua.pcall(vm, 3, Lua.MULTRET, 0);
-
-			if (call != Lua.OK)
-			{
-				Toast.makeText('Lua Call Error: ' + Lua.tostring(vm, call), Toast.LENGTH_LONG);
-				Lua.pop(vm, 1);
-			}
-
-			Toast.makeText('Lua Script Executed!\nTotal GC Memory: ${getMemorySize(Lua.gc(vm, Lua.GCCOUNTB, [0]))}', Toast.LENGTH_LONG);
-		}
-
-		// close the state after pcall
-		Lua.close(vm);
-		vm = null;
+			handle.close();
+		});
 	}
 
 	public function getMemorySize(size:Float):String
