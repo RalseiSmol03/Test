@@ -27,10 +27,10 @@ class LuaHandler
 		{
 			var error:String = getErrorMessage(status, 0);
 			if (error == null)
-				return stop();
+				return close();
 
 			Application.current.window.alert(error, 'Lua Script Error!');
-			return stop();
+			return close();
 		}
 	}
 
