@@ -4,7 +4,7 @@ import haxe.DynamicAccess;
 import hxlua.Lua;
 import hxlua.LuaL;
 import hxlua.Types;
-import lime.app.Application;
+import openfl.Lib;
 
 using StringTools;
 
@@ -29,7 +29,7 @@ class LuaHandler
 			if (error == null)
 				return close();
 
-			Application.current.window.alert(error, 'Lua Script Error!');
+			Lib.application.window.alert(error, 'Lua Script Error!');
 			return close();
 		}
 	}
@@ -49,7 +49,7 @@ class LuaHandler
 		if (type != Lua.TFUNCTION)
 		{
 			if (type > Lua.TNIL)
-				Application.current.window.alert("attempt to call a " + Lua.typename(vm, type) + " value as a callback", 'Lua Call Error!');
+				Lib.application.window.alert("attempt to call a " + Lua.typename(vm, type) + " value as a callback", 'Lua Call Error!');
 
 			Lua.pop(vm, 1);
 			return 0;
@@ -65,7 +65,7 @@ class LuaHandler
 			if (error == null)
 				return 0;
 
-			Application.current.window.alert(error, 'Lua Call Error!');
+			Lib.application.window.alert(error, 'Lua Call Error!');
 			return 0;
 		}
 
