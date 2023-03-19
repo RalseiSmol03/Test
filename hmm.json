@@ -1,0 +1,26 @@
+{
+	"dependencies":[
+		{
+			"name":"lime",
+			"type":"haxelib"
+		},
+		{
+			"name":"hxlua",
+			"type":"git",
+			"ref":"main",
+			"url":"https://github.com/MAJigsaw77/hxlua.git"
+		},
+		{
+			"name":"hxgamejolt-api",
+			"type":"git",
+			"ref":"main",
+			"url":"https://github.com/MAJigsaw77/hxgamejolt-api.git"
+		},
+		{
+			"name":"extension-androidtools",
+			"type":"git",
+			"ref":"main",
+			"url":"https://github.com/MAJigsaw77/extension-androidtools.git"
+		}
+	]
+}
