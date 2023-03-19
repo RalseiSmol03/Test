@@ -35,10 +35,13 @@ class LuaHandler
 		}
 	}
 
-	public function call(name:String, args:Array<Dynamic>):Dynamic
+	public function call(name:String, ?args:Array<Any>):Any
 	{
 		if (vm == null)
 			return 0;
+
+		if (args == null)
+			args = [];
 
 		Lua.getglobal(vm, name);
 
@@ -53,9 +56,8 @@ class LuaHandler
 			return 0;
 		}
 
-		if (args != null)
-			for (arg in args)
-				toLua(vm, arg);
+		for (arg in args)
+			toLua(vm, arg);
 
 		var status:Int = Lua.pcall(vm, args.length, 1, 0);
 		if (status != Lua.OK)
@@ -68,7 +70,7 @@ class LuaHandler
 			return 0;
 		}
 
-		var result:Dynamic = fromLua(vm, -1);
+		var result:Any = fromLua(vm, -1);
 		if (result == null)
 			result = 0;
 
@@ -139,11 +141,11 @@ class LuaHandler
 		{
 			switch (status)
 			{
-				case t if (t == Lua.ERRRUN):
+				case e if (e == Lua.ERRRUN):
 					return "Runtime Error";
-				case t if (t == Lua.ERRMEM):
+				case e if (e == Lua.ERRMEM):
 					return "Memory Allocation Error";
-				case t if (t == Lua.ERRERR):
+				case e if (e == Lua.ERRERR):
 					return "Critical Error";
 				default:
 					return "Unknown Error";
