@@ -95,7 +95,7 @@ class LuaHandler
 		Lua.setglobal(vm, name);
 	}
 
-	public function stop():Void
+	public function close():Void
 	{
 		if (vm == null)
 			return;
