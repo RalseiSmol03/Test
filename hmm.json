@@ -5,6 +5,10 @@
 			"type":"haxelib"
 		},
 		{
+			"name":"openfl",
+			"type":"haxelib"
+		},
+		{
 			"name":"hxlua",
 			"type":"git",
 			"ref":"main",
