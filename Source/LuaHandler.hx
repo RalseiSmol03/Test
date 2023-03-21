@@ -10,7 +10,7 @@ using StringTools;
 
 class LuaHandler
 {
-	private static var callbacks:Map<String, Dynamic> = [];
+	private var callbacks:Map<String, Dynamic> = [];
 
 	private var vm:cpp.RawPointer<Lua_State>;
 
@@ -113,7 +113,7 @@ class LuaHandler
 		callbacks.set(name, callback);
 
 		Lua.pushstring(vm, name);
-		Lua.pushcclosure(vm, cpp.Callable.fromStaticFunction(callbackHandler), 1);
+		Lua.pushcclosure(vm, cpp.Callable.fromFunction(new cpp.Function(callbackHandler)), 1);
 		Lua.setglobal(vm, name);
 	}
 
@@ -154,7 +154,7 @@ class LuaHandler
 		return ret;
 	}
 
-	private static function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
+	private function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
 	{
 		var name:String = Lua.tostring(L, Lua.upvalueindex(1));
 
