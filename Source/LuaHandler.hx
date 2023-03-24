@@ -10,8 +10,6 @@ using StringTools;
 
 class LuaHandler
 {
-	private static var callbacks:Map<String, Dynamic> = [];
-
 	private var vm:cpp.RawPointer<Lua_State>;
 
 	public function new(path:String):Void
@@ -105,9 +103,11 @@ class LuaHandler
 		vm = null;
 	}
 
+	public static var callbacks:Map<String, Dynamic> = [];
+
 	public function setCallback(name:String, callback:Dynamic):Void
 	{
-		if (vm == null || callbacks.exists(name) || !Reflect.isFunction(callback))
+		if (vm == null || (vm != null && !Reflect.isFunction(callback)))
 			return;
 
 		callbacks.set(name, callback);
@@ -119,13 +119,36 @@ class LuaHandler
 
 	public function removeCallback(name:String):Void
 	{
-		if (vm == null || !callbacks.exists(name))
+		if (vm == null)
 			return;
 
 		callbacks.remove(name);
 
 		Lua.pushnil(vm);
 		Lua.setglobal(vm, name);
+	}
+
+	private static function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
+	{
+		var name:String = Lua.tostring(L, Lua.upvalueindex(1));
+
+		if (!callbacks.exists(name) || callbacks.get(name) == null)
+			return 0;
+
+		var args:Array<Any> = [];
+
+		for (i in 0...Lua.gettop(L))
+			args[i] = fromLua(L, i + 1);
+
+		var ret:Dynamic = Reflect.callMethod(null, callbacks.get(name), args);
+
+		if (ret != null)
+		{
+			toLua(L, ret);
+			return 1;
+		}
+
+		return 0;
 	}
 
 	private function getErrorMessage(status:Int, ?number:Int = 1):String
@@ -152,29 +175,6 @@ class LuaHandler
 		}
 
 		return ret;
-	}
-
-	private static function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
-	{
-		var name:String = Lua.tostring(L, Lua.upvalueindex(1));
-
-		if (!callbacks.exists(name) || callbacks.get(name) == null)
-			return 0;
-
-		var args:Array<Any> = [];
-
-		for (i in 0...Lua.gettop(L))
-			args[i] = fromLua(L, i + 1);
-
-		var ret:Dynamic = Reflect.callMethod(null, callbacks.get(name), args);
-
-		if (ret != null)
-		{
-			toLua(L, ret);
-			return 1;
-		}
-
-		return 0;
 	}
 
 	public static function toLua(L:cpp.RawPointer<Lua_State>, object:Any):Bool
