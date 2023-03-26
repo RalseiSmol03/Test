@@ -2,8 +2,8 @@ package;
 
 import android.content.Context;
 import android.widget.Toast;
-import hxlua.Lua;
-import hxgamejolt.GameJolt;
+import hxminiaudio.MiniAudio;
+import hxminiaudio.Types;
 import openfl.Lib;
 import openfl.display.Sprite;
 
@@ -13,43 +13,29 @@ class Main extends Sprite
 	{
 		super();
 
-		var handler:LuaHandler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
-		handler.setCallback('gameJoltInit', function(Game_id:String, Private_key:String)
+		/*var handler:LuaHandler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
+		handler.setCallback('makeToastText', function(text:String)
 		{
-			GameJolt.init(Game_id, Private_key);
-			Toast.makeText('GameJolt Init successfully called!!!', Toast.LENGTH_LONG);
+			Toast.makeText(text, Toast.LENGTH_LONG);
 		});
 		handler.call('init');
+		handler.close();*/
 
-		Lib.application.onExit.add(function(code:Int)
-		{
-			@:privateAccess
-			Toast.makeText('Lua Script Executed!\nTotal GC Memory: ${getMemorySize(Lua.gc(handler.vm, Lua.GCCOUNTB, [0]))}', Toast.LENGTH_LONG);
+		trace('MiniAudio Version: ${MiniAudio.VERSION_STRING}');
 
-			handler.close();
-		});
-	}
+		var engine:MA_Engine = MA_Engine.create();
 
-	public function getMemorySize(size:Float):String
-	{
-		final labels:Array<String> = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+		var result:MA_Result = MiniAudio.engine_init(null, cpp.RawPointer.addressOf(engine));
+		if (result != MA_SUCCESS)
+			Toast.makeText('Failed to initialize audio engine: $result', Toast.LENGTH_LONG);
+		else
+			Toast.makeText('Successfully initialized the audio engine: $result', Toast.LENGTH_LONG);
 
-		var label:Int = 0;
+		var result:MA_Result = MiniAudio.engine_play_sound(cpp.RawPointer.addressOf(engine), Context.getExternalFilesDir(null) + "The Caretaker - It's just a burning memory (2016).mp3", null);
 
-		while (size >= 1000 && (label < labels.length - 1))
-		{
-			size /= 1000;
-			label++;
-		}
-
-		return '${Std.int(size) + "." + addZeros(Std.string(Std.int((size % 1) * 100)), 2)}${labels[label]}';
-	}
-
-	public inline function addZeros(str:String, num:Int)
-	{
-		while (str.length < num)
-			str = '0${str}';
-
-		return str;
+		if (result != MA_SUCCESS)
+			Toast.makeText('Failed to play a sound: $result', Toast.LENGTH_LONG);
+		else
+			Toast.makeText('Successfully played a sound: $result', Toast.LENGTH_LONG);
 	}
 }
