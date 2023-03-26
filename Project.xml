@@ -9,7 +9,6 @@
 
 	<haxelib name="openfl" />
 	<haxelib name="hxlua" />
-	<haxelib name="hxminiaudio" />
 	<haxelib name="extension-androidtools" if="android" />
 
 	<assets path="Assets" rename="assets" />
