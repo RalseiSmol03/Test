@@ -19,12 +19,6 @@
 			"url":"https://github.com/MAJigsaw77/hxlua.git"
 		},
 		{
-			"name":"hxminiaudio",
-			"type":"git",
-			"ref":"main",
-			"url":"https://github.com/MAJigsaw77/hxminiaudio.git"
-		},
-		{
 			"name":"extension-androidtools",
 			"type":"git",
 			"ref":"main",
