@@ -31,7 +31,7 @@ class Main extends Sprite
 		else
 			Toast.makeText('Successfully initialized the audio engine: $result', Toast.LENGTH_LONG);
 
-		var result:MA_Result = MiniAudio.engine_play_sound(cpp.RawPointer.addressOf(engine), Context.getExternalFilesDir(null) + "The Caretaker - It's just a burning memory (2016).mp3", null);
+		var result:MA_Result = MiniAudio.engine_play_sound(cpp.RawPointer.addressOf(engine), Context.getExternalFilesDir(null) + "/The Caretaker - It's just a burning memory (2016).mp3", null);
 
 		if (result != MA_SUCCESS)
 			Toast.makeText('Failed to play a sound: $result', Toast.LENGTH_LONG);
