@@ -81,7 +81,7 @@ jobs:
             		}
             	}
             } catch (error) {
-            	console.log(error.message);
+            	console.log(error.message)
             }
 
       - name: Save Current Cache
