@@ -12,11 +12,7 @@ class Main extends Sprite
 		super();
 
 		var handler:LuaHandler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
-		handler.setCallback('makeToastText', function(text:String)
-		{
-			Toast.makeText(text, Toast.LENGTH_LONG);
-		});
-		handler.call('init');
+		handler.call('onInit');
 		handler.close();
 	}
 }
