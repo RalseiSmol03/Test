@@ -10,6 +10,9 @@ using StringTools;
 
 class LuaHandler
 {
+	public static final Function_Continue:String = 'Function_Continue';
+	public static final Function_Stop:String = 'Function_Stop';
+
 	private var vm:cpp.RawPointer<Lua_State>;
 
 	public function new(path:String):Void
@@ -30,12 +33,15 @@ class LuaHandler
 			Lib.application.window.alert(error, 'Lua Script Error!');
 			return close();
 		}
+
+		set('Function_Continue', Function_Continue);
+		set('Function_Stop', Function_Stop);
 	}
 
 	public function call(name:String, ?args:Array<Any>):Any
 	{
 		if (vm == null)
-			return 0;
+			return Function_Continue;
 
 		if (args == null)
 			args = [];
@@ -50,7 +56,7 @@ class LuaHandler
 				Lib.application.window.alert("attempt to call a " + Lua.typename(vm, type) + " value as a callback", 'Lua Call Error!');
 
 			Lua.pop(vm, 1);
-			return 0;
+			return Function_Continue;
 		}
 
 		for (arg in args)
@@ -61,15 +67,15 @@ class LuaHandler
 		{
 			var error:String = getErrorMessage(status);
 			if (error == null)
-				return 0;
+				return Function_Continue;
 
 			Lib.application.window.alert(error, 'Lua Call Error!');
-			return 0;
+			return Function_Continue;
 		}
 
 		var result:Any = fromLua(vm, -1);
 		if (result == null)
-			result = 0;
+			result = Function_Continue;
 
 		Lua.pop(vm, 1);
 		return result;
