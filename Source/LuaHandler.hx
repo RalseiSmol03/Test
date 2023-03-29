@@ -166,12 +166,12 @@ class LuaHandler
 		var n:Int = Lua.gettop(l);
 
 		/* loop through each argument */
-		for (i in 0...n)
+		for (i in 1...n)
 		{
 			#if android
-			Toast.makeText(Lua.tolstring(l, i, 0), Toast.LENGTH_SHORT);
+			Toast.makeText(Lua.tolstring(l, i, null), Toast.LENGTH_SHORT);
 			#else
-			Sys.println(Lua.tolstring(l, i, 0));
+			Sys.println(Lua.tolstring(l, i, null));
 			#end
 		}
 
