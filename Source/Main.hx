@@ -1,7 +1,6 @@
 package;
 
 import android.content.Context;
-import android.widget.Toast;
 import openfl.Lib;
 import openfl.display.Sprite;
 
