@@ -1,5 +1,8 @@
 package;
 
+#if android
+import android.widget.Toast;
+#end
 import haxe.DynamicAccess;
 import hxlua.Lua;
 import hxlua.LuaL;
@@ -164,7 +167,13 @@ class LuaHandler
 
 		 /* loop through each argument */
 		for (i in 0...n)
+		{
+			#if android
+			Toast.makeText(Lua.tolstring(l, i, null), Toast.LENGTH_SHORT);
+			#else
 			Sys.println(Lua.tolstring(l, i, null));
+			#end
+		}
 
 		/* clear the stack */
 		Lua.pop(l, n);
