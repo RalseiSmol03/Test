@@ -22,6 +22,11 @@ class LuaHandler
 
 		LuaL.openlibs(vm);
 
+		Lua.register(vm, "print", cpp.Function.fromStaticFunction(print));
+
+		set('Function_Continue', Function_Continue);
+		set('Function_Stop', Function_Stop);
+
 		// make a new file with the instance and check if it can be ran
 		var status:Int = LuaL.dofile(vm, path);
 		if (status != Lua.OK)
@@ -33,9 +38,6 @@ class LuaHandler
 			Lib.application.window.alert(error, 'Lua Script Error!');
 			return close();
 		}
-
-		set('Function_Continue', Function_Continue);
-		set('Function_Stop', Function_Stop);
 	}
 
 	public function call(name:String, ?args:Array<Any>):Any
@@ -104,7 +106,6 @@ class LuaHandler
 		if (vm == null)
 			return;
 
-		callbacks.clear();
 		Lua.close(vm);
 		vm = null;
 	}
@@ -156,6 +157,19 @@ class LuaHandler
 
 		return 0;
 	}
+
+	private static function print(l:cpp.RawPointer<Lua_State>):Int
+	{
+		var n:Int = Lua.gettop(l);
+
+		 /* loop through each argument */
+		for (i in 0...n)
+			Sys.println(Lua.tolstring(l, i, null));
+
+		/* clear the stack */
+		Lua.pop(l, n);
+		return 0;
+  	}
 
 	private function getErrorMessage(status:Int, ?number:Int = 1):String
 	{
