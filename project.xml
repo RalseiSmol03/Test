@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Hello World" package="org.openfl.lime.samples.helloworld" version="1.0.0" company="OpenFL" />
+	<meta title="Hello World" package="org.haxeflixel.helloworld" version="1.0.0" company="HaxeFlixel" />
 
-	<app main="Main" path="Export" file="HelloWorld" />
+	<app main="Main" path="export" file="HelloWorld" />
 
 	<window width="1280" height="720" fps="60" vsync="false" background="#FFFFFF" hardware="true" />
 
 	<source path="source" />
 
-	<haxelib name="openfl" />
+	<haxelib name="flixel" />
+	<haxelib name="flixel-addons" />
 	<haxelib name="hxlua" />
 	<haxelib name="extension-androidtools" if="android" />
 
