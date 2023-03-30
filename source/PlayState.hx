@@ -12,7 +12,7 @@ class PlayState extends FlxState
 		handler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
 		handler.setCallback('getExternalFilesDir', Context.getExternalFilesDir);
 		handler.setCallback('getFilesDir', Context.getFilesDir);
-		handler.call('onCreate')
+		handler.call('onCreate');
 
 		var nikki:FlxGifSprite = new FlxGifSprite(0, 0, 'assets/nikki.gif');
 		nikki.screenCenter();
