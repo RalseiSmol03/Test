@@ -8,13 +8,12 @@
 	<window width="1280" height="720" fps="60" vsync="false" background="#FFFFFF" hardware="true" />
 
 	<source path="source" />
+	<assets path="assets" />
 
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="hxlua" />
 	<haxelib name="extension-androidtools" if="android" />
-
-	<assets path="assets" />
 
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_MOUSE" if="mobile" />
