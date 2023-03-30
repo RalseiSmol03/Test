@@ -11,7 +11,7 @@ class Main extends Sprite
 	{
 		super();
 
-		addChild(new FPS(10, 10, 0xFFFFFF));
+		addChild(new FPS(10, 10, 0x000000));
 
 		var handler:LuaHandler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
 		handler.setCallback('getExternalFilesDir', Context.getExternalFilesDir);
