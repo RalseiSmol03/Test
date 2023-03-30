@@ -2,6 +2,7 @@ package;
 
 import android.content.Context;
 import openfl.Lib;
+import openfl.display.FPS;
 import openfl.display.Sprite;
 
 class Main extends Sprite
@@ -9,6 +10,8 @@ class Main extends Sprite
 	public function new():Void
 	{
 		super();
+
+		addChild(new FPS(10, 10, 0xFFFFFF));
 
 		var handler:LuaHandler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
 		handler.setCallback('getExternalFilesDir', Context.getExternalFilesDir);
