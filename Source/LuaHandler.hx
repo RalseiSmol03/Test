@@ -137,9 +137,8 @@ class LuaHandler
 
 	private static function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
 	{
-		var n:Int = Lua.gettop(L);
-
 		var name:String = Lua.tostring(L, Lua.upvalueindex(1));
+		var n:Int = Lua.gettop(L);
 
 		/* loop through each argument */
 		var args:Array<Any> = [];
@@ -153,7 +152,6 @@ class LuaHandler
 		if (ret != null)
 			toLua(L, ret);
 
-		/* return the number of results? */
 		return 0;
 	}
 
