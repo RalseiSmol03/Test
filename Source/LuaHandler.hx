@@ -123,8 +123,7 @@ class LuaHandler
 		callbacks.set(name, callback);
 
 		Lua.pushstring(vm, name);
-		Lua.pushcclosure(vm, cpp.Function.fromStaticFunction(callbackHandler), 1);
-		Lua.setglobal(vm, name);
+		Lua.register(vm, name, cpp.Function.fromStaticFunction(callbackHandler), 1);
 	}
 
 	public function removeCallback(name:String):Void
