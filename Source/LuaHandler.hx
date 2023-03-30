@@ -117,7 +117,7 @@ class LuaHandler
 
 	public function setCallback(name:String, callback:Dynamic):Void
 	{
-		if (vm == null || (vm != null && !Reflect.isFunction(callback)))
+		if (vm == null || (vm != null && (callback != null !Reflect.isFunction(callback))))
 			return;
 
 		callbacks.set(name, callback);
@@ -140,43 +140,43 @@ class LuaHandler
 
 	private static function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
 	{
+		var n:Int = Lua.gettop(L);
 		var name:String = Lua.tostring(L, Lua.upvalueindex(1));
 
-		if (!callbacks.exists(name) || callbacks.get(name) == null)
-			return 0;
-
-		var args:Array<Any> = [];
-
-		for (i in 0...Lua.gettop(L))
-			args[i] = fromLua(L, i + 1);
-
-		var ret:Dynamic = Reflect.callMethod(null, callbacks.get(name), args);
-
-		if (ret != null)
+		if (callbacks.exists(name))
 		{
-			toLua(L, ret);
-			return 1;
+			var args:Array<Any> = [];
+
+			/* loop through each argument */
+			for (i in 0...n)
+				args[i] = fromLua(L, i + 1);
+
+			var ret:Dynamic = Reflect.callMethod(null, callbacks.get(name), args);
+			if (ret != null)
+				toLua(L, ret);
 		}
 
+		/* clear the stack */
+		Lua.pop(L, n);
 		return 0;
 	}
 
-	private static function print(l:cpp.RawPointer<Lua_State>):Int
+	private static function print(L:cpp.RawPointer<Lua_State>):Int
 	{
-		var n:Int = Lua.gettop(l);
+		var n:Int = Lua.gettop(L);
 
 		/* loop through each argument */
-		for (i in 1...n + 1)
+		for (i in 0...n)
 		{
 			#if android
-			Toast.makeText(Lua.tolstring(l, i, null), Toast.LENGTH_SHORT);
+			Toast.makeText(Lua.tolstring(L, i + 1, null), Toast.LENGTH_SHORT);
 			#else
-			Sys.println(Lua.tolstring(l, i, null));
+			Sys.println(Lua.tolstring(L, i + 1, null));
 			#end
 		}
 
 		/* clear the stack */
-		Lua.pop(l, n);
+		Lua.pop(L, n);
 		return 0;
   	}
 
