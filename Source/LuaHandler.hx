@@ -117,7 +117,7 @@ class LuaHandler
 
 	public function setCallback(name:String, callback:Dynamic):Void
 	{
-		if (vm == null || (vm != null && (callback != null !Reflect.isFunction(callback))))
+		if (vm == null || (vm != null && (callback != null && !Reflect.isFunction(callback))))
 			return;
 
 		callbacks.set(name, callback);
