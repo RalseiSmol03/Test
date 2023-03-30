@@ -5,6 +5,8 @@
 
 	<app main="Main" path="Export" file="HelloWorld" />
 
+	<window width="1280" height="720" fps="60" vsync="false" background="#FFFFFF" hardware="true" />
+
 	<source path="Source" />
 
 	<haxelib name="openfl" />
