@@ -140,21 +140,20 @@ class LuaHandler
 		var n:Int = Lua.gettop(L);
 
 		var name:String = Lua.tostring(L, Lua.upvalueindex(1));
-		if (callbacks.exists(name))
-		{
-			var args:Array<Any> = [];
 
-			/* loop through each argument */
-			for (i in 0...n)
-				args[i] = fromLua(L, i + 1);
-
-			var ret:Dynamic = Reflect.callMethod(null, callbacks.get(name), args);
-			if (ret != null)
-				toLua(L, ret);
-		}
+		/* loop through each argument */
+		var args:Array<Any> = [];
+		for (i in 0...n)
+			args[i] = fromLua(L, i + 1);
 
 		/* clear the stack */
 		Lua.pop(L, n);
+
+		var ret:Dynamic = Reflect.callMethod(null, callbacks.get(name), args);
+		if (ret != null)
+			toLua(L, ret);
+
+		/* return the number of results? */
 		return 0;
 	}
 
