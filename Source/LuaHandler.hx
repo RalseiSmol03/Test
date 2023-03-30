@@ -121,6 +121,7 @@ class LuaHandler
 			return;
 
 		callbacks.set(name, callback);
+
 		Lua.pushstring(vm, name);
 		Lua.pushcclosure(vm, cpp.Function.fromStaticFunction(callbackHandler), 1);
 		Lua.setglobal(vm, name);
@@ -132,6 +133,7 @@ class LuaHandler
 			return;
 
 		callbacks.remove(name);
+
 		Lua.pushnil(vm);
 		Lua.setglobal(vm, name);
 	}
