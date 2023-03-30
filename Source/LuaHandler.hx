@@ -122,7 +122,7 @@ class LuaHandler
 
 		callbacks.set(name, callback);
 		Lua.pushstring(vm, name);
-		Lua.pushcclosure(vm, cpp.Function.fromStaticFunction(callbackHandler), 1);
+		Lua.pushcclosure(vm, cpp.Function.fromStaticFunction(callback), 1);
 		Lua.setglobal(vm, name);
 	}
 
@@ -136,7 +136,7 @@ class LuaHandler
 		Lua.setglobal(vm, name);
 	}
 
-	private static function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
+	private static function callback(L:cpp.RawPointer<Lua_State>):Int
 	{
 		var name:String = Lua.tostring(L, Lua.upvalueindex(1));
 		if (!callbacks.exists(name) || callbacks.get(name) == null)
