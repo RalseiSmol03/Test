@@ -32,8 +32,8 @@ jobs:
         with:
           path: |
             .haxelib/
-            Export/android/haxe/
-            Export/android/obj/
+            export/android/haxe/
+            export/android/obj/
           key: cache-android-build
 
       - name: Installing Libraries
@@ -88,13 +88,13 @@ jobs:
         with:
           path: |
             .haxelib/
-            Export/android/haxe/
-            Export/android/obj/
+            export/android/haxe/
+            export/android/obj/
           key: cache-android-build
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
         with:
           name: androidBuild
-          path: Export/android/bin/app/build/outputs/apk/debug
+          path: export/android/bin/app/build/outputs/apk/debug
           if-no-files-found: warn
