@@ -1,8 +1,6 @@
 package;
-
-import android.content.Context;
+;
 import flixel.FlxGame;
-import openfl.Lib;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 
