@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	
-	<meta title="Hello World" package="org.haxeflixel.helloworld" version="1.0.0" company="HaxeFlixel" />
 
-	<app main="Main" path="export" file="HelloWorld" />
+	<app title="Hello World" file="HelloWorld" package="org.haxeflixel.helloworld" main="Main" version="1.0" company="HaxeFlixel" />
+
+	<app preloader="flixel.system.FlxPreloader" />
 
 	<window width="1280" height="720" fps="60" vsync="false" background="#FFFFFF" hardware="true" />
 
