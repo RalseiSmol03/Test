@@ -137,19 +137,22 @@ class LuaHandler
 
 	private static function callbackHandler(L:cpp.RawPointer<Lua_State>):Int
 	{
-		var n:Int = Lua.gettop(L);
+		var name:String = Lua.tostring(L, Lua.upvalueindex(1));
+		if (!callbacks.exists(name) || callbacks.get(name) == null)
+			return 0;
 
-		/* loop through each argument */
 		var args:Array<Any> = [];
-		for (i in 0...n)
+		for (i in 0...Lua.gettop(L))
 			args[i] = fromLua(L, i + 1);
 
-		var ret:Dynamic = Reflect.callMethod(null, callbacks.get(Lua.tostring(L, Lua.upvalueindex(1))), args);
-		if (ret != null)
-			toLua(L, ret);
+		var ret:Dynamic = Reflect.callMethod(null, callbacks.get(name), args);
 
-		/* clear the stack */
-		Lua.pop(L, n);
+		if (ret != null)
+		{
+			toLua(L, ret);
+			return 1;
+		}
+
 		return 0;
 	}
 
