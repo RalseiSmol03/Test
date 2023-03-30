@@ -1,6 +1,7 @@
 package;
 
 import android.content.Context;
+import flixel.FlxGame;
 import openfl.Lib;
 import openfl.display.FPS;
 import openfl.display.Sprite;
@@ -11,12 +12,7 @@ class Main extends Sprite
 	{
 		super();
 
+		addChild(new FlxGame(1280, 720, PlayState, 60, 60, false, false));
 		addChild(new FPS(10, 10, 0x000000));
-
-		var handler:LuaHandler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
-		handler.setCallback('getExternalFilesDir', Context.getExternalFilesDir);
-		handler.setCallback('getFilesDir', Context.getFilesDir);
-		handler.call('onInit');
-		handler.close();
 	}
 }
