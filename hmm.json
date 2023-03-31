@@ -23,7 +23,7 @@
 		{
 			"name":"yagp",
 			"type":"haxelib"
-		}
+		},
 		{
 			"name":"hxlua",
 			"type":"git",
