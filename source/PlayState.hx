@@ -2,6 +2,7 @@ package;
 
 import android.content.Context;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.yagp.FlxGifSprite;
 
