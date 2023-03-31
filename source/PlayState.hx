@@ -4,7 +4,9 @@ import android.content.Context;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.addons.ui.FlxSlider;
 import flixel.addons.yagp.FlxGifSprite;
+import flixel.sound.FlxSound;
 import openfl.filters.ShaderFilter;
 
 class PlayState extends FlxState
