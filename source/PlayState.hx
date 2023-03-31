@@ -33,7 +33,7 @@ class PlayState extends FlxState
 	{
 		handler.call('onUpdate', [elapsed]);
 
-		if (chrome != null)
+		if (chrome != null && chrome.shader != null)
 			chrome.shader.data.bOffset.value = [FlxG.random.float(-10, 10) / 1000];
 
 		super.update(elapsed);
