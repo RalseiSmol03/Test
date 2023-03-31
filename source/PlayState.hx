@@ -23,7 +23,7 @@ class PlayState extends FlxState
 		var nikki:FlxGifSprite = new FlxGifSprite(0, 0, 'assets/nikki.gif');
 		nikki.screenCenter();
 		nikki.antialiasing = true;
-		nikki.shader = chrome;
+		nikki.shader = chrome.shader;
 		add(nikki);
 
 		super.create();
