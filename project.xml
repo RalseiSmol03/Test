@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 
-	<app title="Hello World" file="HelloWorld" package="org.haxeflixel.helloworld" main="Main" version="1.0" company="HaxeFlixel" />
+	<app title="Hello World" file="HelloWorld" package="org.haxeflixel.helloworld" main="Main" version="1.0" company="HaxeFlixel" preloader="flixel.system.FlxPreloader" />
 
-	<app preloader="flixel.system.FlxPreloader" />
-
-	<window width="1280" height="720" fps="60" vsync="false" background="#FFFFFF" hardware="true" />
+	<window width="1280" height="720" fps="60" vsync="false" background="#000000" hardware="true" />
 
 	<set name="BUILD_DIR" value="export" />
 
