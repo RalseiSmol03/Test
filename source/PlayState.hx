@@ -17,10 +17,14 @@ class PlayState extends FlxState
 		handler.setCallback('getFilesDir', Context.getFilesDir);
 		handler.call('onCreate');
 
+		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xFF232323);
+		bg.screenCenter();
+		bg.scrollFactor.set();
+		add(bg);
+
 		legion = new FlxGifSprite(0, 0, 'assets/Legion.gif');
 		legion.setGraphicSize(Std.int(legion.width * 1.5), Std.int(legion.height * 1.5));
 		legion.screenCenter();
-		legion.antialiasing = true;
 		legion.shader = new Chrome();
 		add(legion);
 
