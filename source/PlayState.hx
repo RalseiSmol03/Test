@@ -4,7 +4,7 @@ import android.content.Context;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.addons.yagp.FlxGifSprite;
+import flxgif.FlxGifSprite;
 #if (flixel >= "5.3.0")
 import flixel.sound.FlxSound;
 #else
