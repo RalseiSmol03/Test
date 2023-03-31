@@ -31,10 +31,10 @@ class PlayState extends FlxState
 		bg.scrollFactor.set();
 		add(bg);
 
-		legion = new FlxGifSprite(0, 0).loadGif('assets/Legion.gif');
-		legion.setGraphicSize(Std.int(legion.width * 0.87), Std.int(legion.height * 0.87));
-		legion.screenCenter();
-		add(legion);
+		stairway = new FlxGifSprite(0, 0).loadGif('assets/gifs/Stairway.gif');
+		stairway.setGraphicSize(Std.int(stairway.width * 0.87), Std.int(stairway.height * 0.87));
+		stairway.screenCenter();
+		add(stairway);
 
 		super.create();
 	}
@@ -45,7 +45,7 @@ class PlayState extends FlxState
 
 		FlxG.camera.shake(0.004, 0.1);
 		if (chrome != null && chrome.shader != null)
-			chrome.shader.data.gOffset.value = [(FlxG.random.float(-15, 15) / 1000) * -1];
+			chrome.shader.data.bOffset.value = [(FlxG.random.float(-10, 10) / 1000) * -1];
 
 		super.update(elapsed);
 	}
