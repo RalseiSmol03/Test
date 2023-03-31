@@ -24,7 +24,7 @@ class PlayState extends FlxState
 		add(bg);
 
 		legion = new FlxGifSprite(0, 0, 'assets/Legion.gif');
-		legion.setGraphicSize(Std.int(legion.width * 1.5), Std.int(legion.height * 1.5));
+		legion.setGraphicSize(Std.int(legion.width * 1.1), Std.int(legion.height * 1.1));
 		legion.screenCenter();
 		legion.shader = new Chrome();
 		add(legion);
