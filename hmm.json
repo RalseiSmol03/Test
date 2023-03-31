@@ -17,14 +17,6 @@
 			"type":"haxelib"
 		},
 		{
-			"name":"flixel-addons",
-			"type":"haxelib"
-		},
-		{
-			"name":"yagp",
-			"type":"haxelib"
-		},
-		{
 			"name":"hxlua",
 			"type":"git",
 			"ref":"main",
