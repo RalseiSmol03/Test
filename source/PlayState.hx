@@ -41,7 +41,16 @@ class PlayState extends FlxState
 		stairway.screenCenter();
 		add(stairway);
 
+		inst = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Inst.ogg');
+		vocals = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Voices.ogg');
+
+		for (music in [inst, vocals])
+			FlxG.sound.list.add(music);
+
 		super.create();
+
+		for (music in [inst, vocals])
+			music.play();
 	}
 
 	override function update(elapsed:Float):Void
