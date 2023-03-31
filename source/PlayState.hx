@@ -18,9 +18,10 @@ class PlayState extends FlxState
 		handler.call('onCreate');
 
 		nikki = new FlxGifSprite(0, 0, 'assets/nikki.gif');
-		nikki.shader = new Chrome();
-		nikki.antialiasing = true;
+		nikki.setGraphicSize(Std.int(nikki.width * 1.5), Std.int(nikki.height * 1.5));
 		nikki.screenCenter();
+		nikki.antialiasing = true;
+		nikki.shader = new Chrome();
 		add(nikki);
 
 		super.create();
