@@ -11,9 +11,14 @@ import openfl.filters.ShaderFilter;
 
 class PlayState extends FlxState
 {
-	var handler:LuaHandler;
-	var legion:FlxGifSprite;
 	var chrome:ShaderFilter;
+	var handler:LuaHandler;
+
+	var slider:FlxSlider;
+	var legion:FlxGifSprite;
+
+	var inst:FlxSound;
+	var voices:FlxSound;
 
 	override function create():Void
 	{
@@ -43,7 +48,6 @@ class PlayState extends FlxState
 	{
 		handler.call('onUpdate', [elapsed]);
 
-		FlxG.camera.shake(0.004, 0.1);
 		if (chrome != null && chrome.shader != null)
 			chrome.shader.data.bOffset.value = [(FlxG.random.float(-10, 10) / 1000) * -1];
 
