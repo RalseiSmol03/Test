@@ -5,14 +5,20 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.yagp.FlxGifSprite;
+import openfl.filters.ShaderFilter;
 
 class PlayState extends FlxState
 {
 	var handler:LuaHandler;
 	var legion:FlxGifSprite;
+	var chrome:ShaderFilter;
 
 	override function create():Void
 	{
+		chrome = new ShaderFilter(new Chrome());
+
+		FlxG.camera.setFilters([ShadersHandler.chromaticAberration3]);
+
 		handler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
 		handler.setCallback('getExternalFilesDir', Context.getExternalFilesDir);
 		handler.setCallback('getFilesDir', Context.getFilesDir);
@@ -23,10 +29,9 @@ class PlayState extends FlxState
 		bg.scrollFactor.set();
 		add(bg);
 
-		legion = new FlxGifSprite(0, 0, 'assets/Legion.gif');
+		legion = new FlxGifSprite(0, 0).loadGif('assets/Legion.gif');
 		legion.setGraphicSize(Std.int(legion.width * 0.87), Std.int(legion.height * 0.87));
 		legion.screenCenter();
-		legion.shader = new Chrome();
 		add(legion);
 
 		super.create();
@@ -36,8 +41,9 @@ class PlayState extends FlxState
 	{
 		handler.call('onUpdate', [elapsed]);
 
-		if (legion != null && legion.shader != null)
-			legion.shader.data.gOffset.value = [(FlxG.random.float(-15, 15) / 1000) * -1];
+		FlxG.camera.shake(0.004, 0.1);
+		if (chrome != null && chrome.shader != null)
+			chrome.shader.data.gOffset.value = [(FlxG.random.float(-15, 15) / 1000) * -1];
 
 		super.update(elapsed);
 	}
