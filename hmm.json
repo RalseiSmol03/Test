@@ -17,6 +17,12 @@
 			"type":"haxelib"
 		},
 		{
+			"name":"flxgif",
+			"type":"git",
+			"ref":"main",
+			"url":"https://github.com/MAJigsaw77/flxgif.git"
+		},
+		{
 			"name":"hxlua",
 			"type":"git",
 			"ref":"main",
