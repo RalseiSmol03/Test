@@ -17,7 +17,7 @@ class PlayState extends FlxState
 	var chrome:ShaderFilter;
 	var handler:LuaHandler;
 
-	var legion:FlxGifSprite;
+	var stairway:FlxGifSprite;
 	var inst:FlxSound;
 	var voices:FlxSound;
 
@@ -44,14 +44,14 @@ class PlayState extends FlxState
 		add(stairway);
 
 		inst = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Inst.ogg');
-		vocals = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Voices.ogg');
+		voices = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Voices.ogg');
 
-		for (music in [inst, vocals])
+		for (music in [inst, voices])
 			FlxG.sound.list.add(music);
 
 		super.create();
 
-		for (music in [inst, vocals])
+		for (music in [inst, voices])
 			music.play();
 	}
 
@@ -64,7 +64,7 @@ class PlayState extends FlxState
 
 		super.update(elapsed);
 
-		if (Math.abs(inst.time - vocals.time) > 20)
-			vocals.time = inst.time;
+		if (Math.abs(inst.time - voices.time) > 20)
+			voices.time = inst.time;
 	}
 }
