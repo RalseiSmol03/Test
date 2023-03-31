@@ -4,7 +4,6 @@ import android.content.Context;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.addons.ui.FlxSlider;
 import flixel.addons.yagp.FlxGifSprite;
 #if (flixel >= "5.3.0")
 import flixel.sound.FlxSound;
@@ -18,9 +17,7 @@ class PlayState extends FlxState
 	var chrome:ShaderFilter;
 	var handler:LuaHandler;
 
-	var slider:FlxSlider;
 	var legion:FlxGifSprite;
-
 	var inst:FlxSound;
 	var voices:FlxSound;
 
