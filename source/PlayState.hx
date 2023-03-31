@@ -17,7 +17,7 @@ class PlayState extends FlxState
 	{
 		chrome = new ShaderFilter(new Chrome());
 
-		FlxG.camera.setFilters([ShadersHandler.chromaticAberration3]);
+		FlxG.camera.setFilters([chrome]);
 
 		handler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
 		handler.setCallback('getExternalFilesDir', Context.getExternalFilesDir);
