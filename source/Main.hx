@@ -11,6 +11,6 @@ class Main extends Sprite
 		super();
 
 		addChild(new FlxGame(1280, 720, PlayState, 60, 60, false, false));
-		addChild(new FPS(10, 10, 0x000000));
+		addChild(new FPS(10, 10, 0xFFFFFF));
 	}
 }
