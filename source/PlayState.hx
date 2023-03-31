@@ -6,7 +6,11 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.ui.FlxSlider;
 import flixel.addons.yagp.FlxGifSprite;
+#if (flixel >= "5.3.0")
 import flixel.sound.FlxSound;
+#else
+import flixel.system.FlxSound;
+#end
 import openfl.filters.ShaderFilter;
 
 class PlayState extends FlxState
@@ -39,6 +43,7 @@ class PlayState extends FlxState
 		stairway = new FlxGifSprite(0, 0).loadGif('assets/gifs/Stairway.gif');
 		stairway.setGraphicSize(Std.int(stairway.width * 0.87), Std.int(stairway.height * 0.87));
 		stairway.screenCenter();
+		stairway.scrollFactor.set();
 		add(stairway);
 
 		inst = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Inst.ogg');
