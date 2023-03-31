@@ -61,5 +61,8 @@ class PlayState extends FlxState
 			chrome.shader.data.bOffset.value = [(FlxG.random.float(-10, 10) / 1000) * -1];
 
 		super.update(elapsed);
+
+		if (Math.abs(inst.time - vocals.time) > 20)
+			vocals.time = inst.time;
 	}
 }
