@@ -8,7 +8,7 @@ import flixel.addons.yagp.FlxGifSprite;
 class PlayState extends FlxState
 {
 	var handler:LuaHandler;
-	var nikki:FlxGifSprite;
+	var legion:FlxGifSprite;
 
 	override function create():Void
 	{
@@ -17,12 +17,12 @@ class PlayState extends FlxState
 		handler.setCallback('getFilesDir', Context.getFilesDir);
 		handler.call('onCreate');
 
-		nikki = new FlxGifSprite(0, 0, 'assets/nikki.gif');
-		nikki.setGraphicSize(Std.int(nikki.width * 1.5), Std.int(nikki.height * 1.5));
-		nikki.screenCenter();
-		nikki.antialiasing = true;
-		nikki.shader = new Chrome();
-		add(nikki);
+		legion = new FlxGifSprite(0, 0, 'assets/Legion.gif');
+		legion.setGraphicSize(Std.int(legion.width * 1.5), Std.int(legion.height * 1.5));
+		legion.screenCenter();
+		legion.antialiasing = true;
+		legion.shader = new Chrome();
+		add(legion);
 
 		super.create();
 	}
@@ -31,8 +31,8 @@ class PlayState extends FlxState
 	{
 		handler.call('onUpdate', [elapsed]);
 
-		if (nikki != null && nikki.shader != null)
-			nikki.shader.data.bOffset.value = [FlxG.random.float(-10, 10) / 1000];
+		if (legion != null && legion.shader != null)
+			legion.shader.data.bOffset.value = [FlxG.random.float(-10, 10) / 1000];
 
 		super.update(elapsed);
 	}
