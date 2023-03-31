@@ -3,7 +3,7 @@
 
 	<app title="Hello World" file="HelloWorld" package="org.haxeflixel.helloworld" main="Main" version="1.0" company="HaxeFlixel" preloader="flixel.system.FlxPreloader" />
 
-	<window width="1280" height="720" fps="60" vsync="false" background="#000000" hardware="true" />
+	<window width="1280" height="720" orientation="landscape" fps="60" vsync="false" background="#000000" hardware="true" />
 
 	<set name="BUILD_DIR" value="export" />
 
@@ -13,8 +13,8 @@
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="hxlua" />
-	<haxelib name="extension-androidtools" if="android" />
 	<haxelib name="yagp" />
+	<haxelib name="extension-androidtools" if="android" />
 
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_MOUSE" if="mobile" />
