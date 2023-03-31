@@ -36,7 +36,7 @@ class PlayState extends FlxState
 		handler.call('onUpdate', [elapsed]);
 
 		if (legion != null && legion.shader != null)
-			legion.shader.data.bOffset.value = [FlxG.random.float(-10, 10) / 1000];
+			legion.shader.data.gOffset.value = [(FlxG.random.float(-15, 15) / 1000) * -1];
 
 		super.update(elapsed);
 	}
