@@ -250,8 +250,6 @@ class LuaHandler
 					Lua.settable(L, -3);
 				}
 
-			case TClass(cpp.Pointer<cpp.Void>):
-				Lua.pushlightuserdata(L, object);
 			case TObject:
 				var tLen:Int = 0;
 				for (n in Reflect.fields(object))
@@ -283,8 +281,6 @@ class LuaHandler
 				ret = null;
 			case t if (t == Lua.TBOOLEAN):
 				ret = Lua.toboolean(L, v) == 1 ? true : false;
-			case t if (t == Lua.LUA_TLIGHTUSERDATA):
-				ret = lua_touserdata(L, v);
 			case t if (t == Lua.TNUMBER):
 				ret = Lua.tonumber(L, v);
 			case t if (t == Lua.TSTRING):
