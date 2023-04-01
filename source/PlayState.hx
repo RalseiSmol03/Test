@@ -27,11 +27,6 @@ class PlayState extends FlxState
 
 		FlxG.camera.setFilters([chrome]);
 
-		handler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
-		handler.setCallback('getExternalFilesDir', Context.getExternalFilesDir);
-		handler.setCallback('getFilesDir', Context.getFilesDir);
-		handler.call('onCreate');
-
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xFF232323);
 		bg.screenCenter();
 		bg.scrollFactor.set();
@@ -43,11 +38,33 @@ class PlayState extends FlxState
 		stairway.scrollFactor.set();
 		add(stairway);
 
-		inst = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Inst.ogg');
-		voices = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Voices.ogg');
+		inst = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Inst.ogg', true);
+		voices = new FlxSound().loadEmbedded('assets/audio/Pteromerhanophobia_Voices.ogg', true);
 
 		for (music in [inst, voices])
 			FlxG.sound.list.add(music);
+
+		handler = new LuaHandler(Context.getExternalFilesDir(null) + "/script.lua");
+		handler.setCallback('setSoundPitch', function(value:Float)
+		{
+			for (music in [inst, voices])
+				music.pitch = value;
+		});
+		handler.setCallback('setSoundVolume', function(value:Float)
+		{
+			for (music in [inst, voices])
+				music.volume = value;
+		});
+		handler.setCallback('setChrome', function(rOffset:Float, gOffset:Float, bOffset:Float)
+		{
+			if (chrome != null && chrome.shader != null)
+			{
+				chrome.shader.data.rOffset.value = [rOffset];
+				chrome.shader.data.gOffset.value = [gOffset];
+				chrome.shader.data.bOffset.value = [bOffset];
+			}
+		});
+		handler.call('onCreate');
 
 		super.create();
 
@@ -58,9 +75,6 @@ class PlayState extends FlxState
 	override function update(elapsed:Float):Void
 	{
 		handler.call('onUpdate', [elapsed]);
-
-		if (chrome != null && chrome.shader != null)
-			chrome.shader.data.bOffset.value = [(FlxG.random.float(-10, 10) / 1000) * -1];
 
 		super.update(elapsed);
 
