@@ -31,8 +31,7 @@ class FPS extends TextField
 		this.y = y;
 
 		autoSize = LEFT;
-		selectable = false;
-		mouseEnabled = false;
+		selectable = mouseEnabled = false;
 
 		#if mobile
 		defaultTextFormat = new TextFormat('_sans', Std.int(14 * Math.min(Lib.current.stage.stageWidth / FlxG.width, Lib.current.stage.stageHeight / FlxG.height)), color);
@@ -88,13 +87,13 @@ class FPS extends TextField
 		final labels:Array<String> = ['B', 'KB', 'MB', 'GB']; // I don't think a mod can use more lol
 
 		var label:Int = 0;
-
 		while (size >= 1000 && (label < labels.length - 1))
 		{
 			size /= 1000;
 			label++;
 		}
 
-		return Std.string(Math.abs(FlxMath.roundDecimal(size, 2))) + labels[label];
+		return '${Math.abs(FlxMath.roundDecimal(size, 2))} ${labels[label]}';
 	}
 }
+ 
