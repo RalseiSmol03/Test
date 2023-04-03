@@ -95,6 +95,16 @@ class LuaHandler
 		Lua.setglobal(vm, name);
 	}
 
+	public function get(name:String):Any
+	{
+		Lua.getglobal(vm, name);
+		var ret:Any = fromLua(vm, -1);
+		if (ret != null)
+			Lua.pop(vm, 1);
+
+		return ret;
+	}
+
 	public function remove(name:String):Void
 	{
 		if (vm == null)
