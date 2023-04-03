@@ -49,4 +49,10 @@ class PlayState extends FlxState
 		handler.call('onUpdate', [elapsed]);
 		super.update(elapsed);
 	}
+
+	override function destroy():Void
+	{
+		LuaHandler.callbacks.clear();
+		super.destroy();
+	}
 }
