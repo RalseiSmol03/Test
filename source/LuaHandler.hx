@@ -126,7 +126,7 @@ class LuaHandler
 		vm = null;
 	}
 
-	public function setCallback(name:String, callback:Dynamic):Void
+	public function setCallback(name:String, callback:Function):Void
 	{
 		if (vm == null || (vm != null && (callback != null && !Reflect.isFunction(callback))))
 			return;
