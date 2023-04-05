@@ -1,8 +1,9 @@
 package;
 
-#if android
+#if (android && debug)
 import android.widget.Toast;
 #end
+import haxe.Constraints;
 import haxe.DynamicAccess;
 import hxlua.Lua;
 import hxlua.LuaL;
@@ -15,6 +16,8 @@ class LuaHandler
 {
 	public static final Function_Continue:String = 'Function_Continue';
 	public static final Function_Stop:String = 'Function_Stop';
+
+	public static var callbacks:Map<String, Function> = [];
 
 	private var vm:cpp.RawPointer<Lua_State>;
 
@@ -123,8 +126,6 @@ class LuaHandler
 		vm = null;
 	}
 
-	public static var callbacks:Map<String, Dynamic> = [];
-
 	public function setCallback(name:String, callback:Dynamic):Void
 	{
 		if (vm == null || (vm != null && (callback != null && !Reflect.isFunction(callback))))
@@ -182,7 +183,7 @@ class LuaHandler
 		/* loop through each argument */
 		for (i in 0...n)
 		{
-			#if android
+			#if (android && debug)
 			Toast.makeText(Lua.tolstring(L, i + 1, null), Toast.LENGTH_SHORT);
 			#else
 			Sys.println(Lua.tolstring(L, i + 1, null));
@@ -235,17 +236,14 @@ class LuaHandler
 			case TClass(String):
 				Lua.pushstring(L, object);
 			case TClass(Array):
-				var arr:Array<Any> = object;
+				Lua.createtable(L, object.length, 0);
 
-				Lua.createtable(L, arr.length, 0);
-
-				for (i in 0...arr.length)
+				for (i in 0...object.length)
 				{
 					Lua.pushnumber(L, i + 1);
-					toLua(L, arr[i]);
+					toLua(L, object[i]);
 					Lua.settable(L, -3);
 				}
-
 			case TClass(haxe.ds.StringMap) | TClass(haxe.ds.ObjectMap):
 				var tLen:Int = 0;
 				for (n => val in object)
@@ -259,7 +257,6 @@ class LuaHandler
 					toLua(L, val);
 					Lua.settable(L, -3);
 				}
-
 			case TObject:
 				var tLen:Int = 0;
 				for (n in Reflect.fields(object))
