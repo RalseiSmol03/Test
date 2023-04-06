@@ -236,7 +236,7 @@ class LuaHandler
 			case TClass(String):
 				Lua.pushstring(L, object);
 			case TClass(Array):
-				var tArray:Array<Any> = cast(object, Array<Any>);
+				var tArray:Array<Any> = cast object;
 
 				Lua.createtable(L, tArray.length, 0);
 
