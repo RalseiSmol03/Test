@@ -299,6 +299,7 @@ class LuaHandler
 				var array:Bool = true;
 
 				Lua.pushnil(L);
+
 				while (Lua.next(L, v < 0 ? v - 1 : v) != 0)
 				{
 					if (array)
@@ -307,7 +308,7 @@ class LuaHandler
 							array = false;
 						else
 						{
-							var index = Lua.tonumber(L, -2);
+							var index:Float = Lua.tonumber(L, -2);
 							if (index < 0 || Std.int(index) != index)
 								array = false;
 						}
