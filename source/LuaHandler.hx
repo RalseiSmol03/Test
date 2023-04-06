@@ -236,12 +236,14 @@ class LuaHandler
 			case TClass(String):
 				Lua.pushstring(L, object);
 			case TClass(Array):
-				Lua.createtable(L, object.length, 0);
+				var tArray:Array<Any> = cast(object, Array<Any>);
 
-				for (i in 0...object.length)
+				Lua.createtable(L, tArray.length, 0);
+
+				for (i in 0...tArray.length)
 				{
 					Lua.pushnumber(L, i + 1);
-					toLua(L, object[i]);
+					toLua(L, tArray[i]);
 					Lua.settable(L, -3);
 				}
 			case TClass(haxe.ds.StringMap) | TClass(haxe.ds.ObjectMap):
