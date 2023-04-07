@@ -89,7 +89,7 @@ class LuaHandler
 		return result;
 	}
 
-	public function set(name:String, value:Dynamic):Void
+	public function set(name:String, value:Any):Void
 	{
 		if (vm == null)
 			return;
@@ -108,13 +108,30 @@ class LuaHandler
 		return ret;
 	}
 
-	public function remove(name:String):Void
+	public function setToTable(table:String, name:String, value:Any):Void
 	{
-		if (vm == null)
-			return;
+		Lua.getglobal(vm, table);
 
-		Lua.pushnil(vm);
-		Lua.setglobal(vm, name);
+		if (Lua.istable(vm, -1) == 1)
+		{
+			Lua.pushstring(vm, name);
+			toLua(vm, value);
+			Lua.settable(vm, -3);
+		}
+
+		Lua.pop(vm, 1);
+	}
+
+	public function getFromTable(table:String, name:String):Any
+	{
+		Lua.getglobal(vm, table);
+		Lua.getfield(vm, -1, name);
+
+		var ret:Dynamic = Convert.fromLua(vm, -1);
+		if (ret != null)
+			Lua.pop(vm, 1);
+
+		return ret;
 	}
 
 	public function close():Void
