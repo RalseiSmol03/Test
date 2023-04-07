@@ -210,9 +210,9 @@ class LuaHandler
 		for (i in 0...n)
 		{
 			#if (android && debug)
-			Toast.makeText(Lua.tolstring(L, i + 1, null), Toast.LENGTH_SHORT);
+			Toast.makeText(Lua.tostring(L, i + 1), Toast.LENGTH_SHORT);
 			#else
-			Sys.println(Lua.tolstring(L, i + 1, null));
+			Sys.println(Lua.tostring(L, i + 1));
 			#end
 		}
 
@@ -259,8 +259,6 @@ class LuaHandler
 				Lua.pushnumber(L, object);
 			case TClass(String):
 				Lua.pushstring(L, object);
-			case TFunction:
-				Lua.pushcfunction(L, cast object);
 			case TClass(Array):
 				var tArray:Array<Any> = cast object;
 
@@ -320,8 +318,6 @@ class LuaHandler
 				ret = Lua.tonumber(L, v);
 			case t if (t == Lua.TSTRING):
 				ret = Lua.tostring(L, v);
-			case t if (t == Lua.TFUNCTION):
-				ret = Lua.tocfunction(L, v);
 			case t if (t == Lua.TTABLE):
 				var count:Int = 0;
 				var array:Bool = true;
