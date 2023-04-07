@@ -246,13 +246,11 @@ class LuaHandler
 				Lua.pushnil(L);
 			case TBool:
 				Lua.pushboolean(L, object ? 1 : 0);
-			case TInt:
-				Lua.pushinteger(L, object);
-			case TFloat:
+			case TInt | TFloat:
 				Lua.pushnumber(L, object);
 			case TClass(String):
 				Lua.pushstring(L, object);
-			case TClass(Lua_CFunction):
+			case TFunction:
 				Lua.pushcfunction(L, object);
 			case TClass(Array):
 				var tArray:Array<Any> = cast object;
