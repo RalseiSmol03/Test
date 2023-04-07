@@ -1,6 +1,6 @@
 package;
 
-#if (android && debug)
+#if android
 import android.widget.Toast;
 #end
 import haxe.Constraints;
@@ -209,7 +209,7 @@ class LuaHandler
 		/* loop through each argument */
 		for (i in 0...n)
 		{
-			#if (android && debug)
+			#if android
 			Toast.makeText(Lua.tostring(L, i + 1), Toast.LENGTH_SHORT);
 			#else
 			Sys.println(Lua.tostring(L, i + 1));
