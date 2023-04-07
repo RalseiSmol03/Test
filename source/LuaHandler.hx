@@ -100,6 +100,9 @@ class LuaHandler
 
 	public function get(name:String):Any
 	{
+		if (vm == null)
+			return null;
+
 		Lua.getglobal(vm, name);
 		var ret:Any = fromLua(vm, -1);
 		if (ret != null)
@@ -110,6 +113,9 @@ class LuaHandler
 
 	public function setToTable(table:String, name:String, value:Any):Void
 	{
+		if (vm == null)
+			return;
+
 		Lua.getglobal(vm, table);
 
 		if (Lua.istable(vm, -1) == 1)
@@ -124,6 +130,9 @@ class LuaHandler
 
 	public function getFromTable(table:String, name:String):Any
 	{
+		if (vm == null)
+			return null;
+
 		Lua.getglobal(vm, table);
 		Lua.getfield(vm, -1, name);
 
