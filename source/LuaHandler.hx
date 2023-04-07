@@ -252,6 +252,8 @@ class LuaHandler
 				Lua.pushnumber(L, object);
 			case TClass(String):
 				Lua.pushstring(L, object);
+			case TClass(Lua_CFunction):
+				Lua.pushcfunction(L, object);
 			case TClass(Array):
 				var tArray:Array<Any> = cast object;
 
@@ -311,6 +313,8 @@ class LuaHandler
 				ret = Lua.tonumber(L, v);
 			case t if (t == Lua.TSTRING):
 				ret = Lua.tostring(L, v);
+			case t if (t == Lua.TFUNCTION):
+				ret = Lua.tocfunction(L, v);
 			case t if (t == Lua.TTABLE):
 				var count:Int = 0;
 				var array:Bool = true;
