@@ -260,7 +260,7 @@ class LuaHandler
 			case TClass(String):
 				Lua.pushstring(L, object);
 			case TFunction:
-				Lua.pushcfunction(L, cast(object, Lua_CFunction));
+				Lua.pushcfunction(L, cast object);
 			case TClass(Array):
 				var tArray:Array<Any> = cast object;
 
