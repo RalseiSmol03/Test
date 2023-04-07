@@ -127,7 +127,7 @@ class LuaHandler
 		Lua.getglobal(vm, table);
 		Lua.getfield(vm, -1, name);
 
-		var ret:Dynamic = Convert.fromLua(vm, -1);
+		var ret:Dynamic = fromLua(vm, -1);
 		if (ret != null)
 			Lua.pop(vm, 1);
 
