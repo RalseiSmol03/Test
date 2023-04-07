@@ -210,9 +210,9 @@ class LuaHandler
 		for (i in 0...n)
 		{
 			#if android
-			Toast.makeText(Lua.tostring(L, i + 1), Toast.LENGTH_SHORT);
+			Toast.makeText(Lua.tolstring(L, i + 1, null), Toast.LENGTH_SHORT);
 			#else
-			Sys.println(Lua.tostring(L, i + 1));
+			Sys.println(Lua.tolstring(L, i + 1, null));
 			#end
 		}
 
