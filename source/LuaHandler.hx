@@ -256,9 +256,9 @@ class LuaHandler
 			case TBool:
 				Lua.pushboolean(L, object ? 1 : 0);
 			case TInt | TFloat:
-				Lua.pushnumber(L, cast(val, Float));
+				Lua.pushnumber(L, cast(object, Float));
 			case TClass(String):
-				Lua.pushstring(L, cast(val, String));
+				Lua.pushstring(L, cast(object, String));
 			case TClass(Array):
 				var tArray:Array<Any> = cast object;
 
