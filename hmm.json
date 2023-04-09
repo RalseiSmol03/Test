@@ -25,7 +25,7 @@
 		{
 			"name":"hxlua",
 			"type":"git",
-			"ref":"experimental",
+			"ref":"main",
 			"url":"https://github.com/MAJigsaw77/hxlua.git"
 		},
 		{
