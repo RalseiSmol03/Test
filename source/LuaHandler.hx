@@ -1,6 +1,6 @@
 package;
 
-#if android
+#if (android && debug)
 import android.widget.Toast;
 #end
 import haxe.Constraints;
@@ -209,10 +209,10 @@ class LuaHandler
 		/* loop through each argument */
 		for (i in 0...n)
 		{
-			#if android
-			Toast.makeText(Lua.tostring(L, i + 1), Toast.LENGTH_SHORT);
+			#if (android && debug)
+			Toast.makeText(cast(Lua.tostring(L, i + 1), String), Toast.LENGTH_SHORT);
 			#else
-			Sys.println(Lua.tostring(L, i + 1));
+			Sys.println(cast(Lua.tostring(L, i + 1), String));
 			#end
 		}
 
@@ -223,7 +223,7 @@ class LuaHandler
 
 	private function getErrorMessage(status:Int, ?number:Int = 1):String
 	{
-		var ret:String = Lua.tostring(vm, -1);
+		var ret:String = cast(Lua.tostring(vm, -1), String);
 		Lua.pop(vm, number);
 
 		if (ret != null)
@@ -317,7 +317,7 @@ class LuaHandler
 			case t if (t == Lua.TNUMBER):
 				ret = Lua.tonumber(L, v);
 			case t if (t == Lua.TSTRING):
-				ret = Lua.tostring(L, v);
+				ret = cast(Lua.tostring(L, v), String);
 			case t if (t == Lua.TTABLE):
 				var count:Int = 0;
 				var array:Bool = true;
@@ -369,7 +369,7 @@ class LuaHandler
 						switch (Lua.type(L, -2))
 						{
 							case t if (t == Lua.TSTRING):
-								vAccess.set(Lua.tostring(L, -2), fromLua(L, -1));
+								vAccess.set(cast(Lua.tostring(L, -2), String), fromLua(L, -1));
 							case t if (t == Lua.TNUMBER):
 								vAccess.set(Std.string(Lua.tonumber(L, -2)), fromLua(L, -1));
 						}
