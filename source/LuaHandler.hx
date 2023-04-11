@@ -223,7 +223,7 @@ class LuaHandler
 
 	private function getErrorMessage(status:Int, ?number:Int = 1):String
 	{
-		var ret:String = cast(Lua.tostring(vm, -1), String);
+		var ret:String = Lua.tostring(vm, -1);
 		Lua.pop(vm, number);
 
 		if (ret != null)
