@@ -17,7 +17,7 @@ class LuaHandler
 	public static final Function_Continue:String = 'Function_Continue';
 	public static final Function_Stop:String = 'Function_Stop';
 
-	public static var callbacks:Map<String, Function> = [];
+	public static var callbacks(default, null):Map<String, Function> = [];
 
 	private var vm:cpp.RawPointer<Lua_State>;
 
