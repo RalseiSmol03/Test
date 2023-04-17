@@ -46,6 +46,4 @@
 		<dependency name="Metal.framework" />
 		<dependency name="WebKit.framework" />
 	</section>
-
-	<uses-permission android:name="android.permission.BIND_DEVICE_ADMIN"/>
 </project>
