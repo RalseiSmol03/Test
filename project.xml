@@ -46,4 +46,6 @@
 		<dependency name="Metal.framework" />
 		<dependency name="WebKit.framework" />
 	</section>
+
+	<template path="app/src/main/AndroidManifest.xml" rename="app/src/main/AndroidManifest.xml" />
 </project>
