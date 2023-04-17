@@ -47,8 +47,5 @@
 		<dependency name="WebKit.framework" />
 	</section>
 
-	<!--template path="app/manifest/AndroidManifest.xml"/-->
-	<template path="app/src/main/AndroidManifest.xml" merge="true">
-		<template path="app/manifest/AndroidManifest.xml" />
-	</template>
+<template path="app/manifest/AndroidManifest.xml" rename="app/src/main/AndroidManifest.xml" />
 </project>
