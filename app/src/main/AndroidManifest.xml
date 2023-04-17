@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.haxe.extension.androidtools">
-    <application
-        android:debuggable="::DEBUG::"
-        android:hardwareAccelerated="true">
-    </application>
+    package="org.haxeflixel.helloworld">
     <uses-permission android:name="android.permission.BIND_DEVICE_ADMIN"/>
-    <activity android:name=".Tools"
-                android:label="@string/activity_sample_device_admin">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.SAMPLE_CODE" />
-        </intent-filter>
-    </activity>
-    <receiver android:name=".Tools$DeviceAdminSample"
-            android:label="@string/sample_device_admin"
-            android:description="@string/sample_device_admin_description"
-            android:permission="android.permission.BIND_DEVICE_ADMIN">
-        <meta-data android:name="android.app.device_admin"
-                android:resource="@xml/device_admin" />
-        <intent-filter>
-            <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
-        </intent-filter>
-    </receiver>
+    <application
+        android:label="Hello World">
+    </application>
 </manifest>
