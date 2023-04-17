@@ -9,6 +9,7 @@
 
 	<source path="source" />
 	<assets path="assets" />
+	<assets path="app" />
 
 	<haxelib name="flixel" />
 	<haxelib name="flxgif" />
