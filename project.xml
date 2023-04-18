@@ -39,6 +39,7 @@
 			<!--Target SDK-->
 			<android target-sdk-version="29" if="${lime &lt; 8.1.0}" />
 		</config>
+		<merge manifest="app/manifest/AndroidManifest.xml" />
 	</section>
 
 	<section if="ios">
