@@ -27,12 +27,6 @@
 			"type":"git",
 			"ref":"main",
 			"url":"https://github.com/MAJigsaw77/hxlua.git"
-		},
-		{
-			"name":"extension-androidtools",
-			"type":"git",
-			"ref":"main",
-			"url":"https://github.com/MAJigsaw77/extension-androidtools.git"
 		}
 	]
 }
